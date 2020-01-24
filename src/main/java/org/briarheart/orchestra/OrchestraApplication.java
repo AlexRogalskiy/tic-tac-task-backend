@@ -16,6 +16,13 @@ public class OrchestraApplication {
         SpringApplication.run(OrchestraApplication.class, args);
     }
 
+    /**
+     * This bean demonstrates using of configuration properties stored in the GitHub repository. Properties are
+     * loaded by separate Spring Boot application - configuration server that looks for properties file named
+     * according to the value of 'spring.application.name' parameter from bootstrap.yml. Library
+     * 'org.springframework.cloud:spring-cloud-config-client' is responsible for handling communication between client
+     * and configuration server.
+     */
     @Bean
     public CommandLineRunner projectNamePrinter(@Value("${application.name:n/a}") String projectName) {
         return args -> {
@@ -28,6 +35,10 @@ public class OrchestraApplication {
         return new RefreshCounter();
     }
 
+    /**
+     * This class demonstrates ability to handle refresh events that might be triggered to reload configuration
+     * properties.
+     */
     public static class RefreshCounter {
         private final AtomicLong counter = new AtomicLong(0L);
 
