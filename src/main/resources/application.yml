@@ -1,4 +1,7 @@
 spring:
+  application:
+    name: orchestra
+
   r2dbc:
       url: r2dbc:${DATABASE_URL}
 
@@ -55,3 +58,11 @@ application:
         # seven days
         validity-seconds: 604800
         signing-key: ${SECURITY_ACCESS_TOKEN_SIGNING_KEY}
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    preferIpAddress: true
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
